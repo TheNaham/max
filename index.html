@@ -310,7 +310,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.72);padding:56px 0 34px;fon
       <p style="margin-left:auto;margin-right:auto">강의에서 그대로 시연하는 벨이삭 AI 영업 봇 — 명함 한 장에서 바이어 메일까지.</p>
     </div>
     <div class="vwrap reveal">
-      <video id="pv" playsinline muted loop preload="metadata" poster="">
+      <video id="pv" playsinline muted loop autoplay preload="auto" poster="">
         
       </video>
       <div class="vload" id="vload">영상 불러오는 중…</div>
@@ -720,7 +720,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.72);padding:56px 0 34px;fon
     return URL.createObjectURL(new Blob([arr],{type:mime}));
   }
   if(pv){
-    pv.addEventListener('loadeddata',function(){ if(vload)vload.style.display='none'; });
+    ['loadedmetadata','loadeddata','canplay','playing'].forEach(function(ev){pv.addEventListener(ev,function(){ if(vload)vload.style.display='none'; });});
     try{
       var srcs=[['vdata','video/mp4'],['wdata','video/webm']], added=0;
       srcs.forEach(function(x){
